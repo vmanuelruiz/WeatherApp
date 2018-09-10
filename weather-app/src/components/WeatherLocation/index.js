@@ -4,6 +4,13 @@ import WeatherData from './WeatherData';
 import {SUN, WINDY} from './../../constants/weathers';
 import './styles.css';
 
+const location = 'Buenos Aires,ar';
+const api_key = '42cb6505fb56f3a2d5635064d0664327';
+const url_base_weather = 'http://api.openweathermap.org/data/2.5/weather';
+
+const api_weather = `${url_base_weather}?q=${location}&appid=${api_key}`;
+
+
 const data = {
     temperature: 20,
     weatherState: SUN,
@@ -29,6 +36,13 @@ class WeatherLocation extends Component {
     }
 
     handleUpdateClic = () => {
+        fetch(api_weather).then(resolve => {
+            return resolve.json();
+        }).then(data => {
+            console.log(data);
+            debugger;
+        });
+
         console.log('actualizado');
         this.setState({
             city: 'Buenos Aires!',
