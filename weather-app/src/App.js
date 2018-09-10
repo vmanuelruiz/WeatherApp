@@ -7,7 +7,7 @@ class App extends Component {
     //console.log("debug");
     return (
       <div className="App">
-        <WeatherLocation> </WeatherLocation>
+        <WeatherLocation city="Bogota,col"> </WeatherLocation>
       </div>
     );
   }
