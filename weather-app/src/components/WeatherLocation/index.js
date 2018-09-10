@@ -51,7 +51,6 @@ class WeatherLocation extends Component {
                 data: newWeather,
             });
         });
-        
     };
 
     render = () =>{
@@ -61,7 +60,7 @@ class WeatherLocation extends Component {
             <Location city={city}></Location>
             {data ? 
                 <WeatherData data={data}></WeatherData> : //parte de SI del IF
-                <CircularProgress size={50} />
+                <CircularProgress size={50} /> //parte del else del IF
             }
         </div>
         );
@@ -71,6 +70,6 @@ class WeatherLocation extends Component {
 
 WeatherLocation.propTypes = {
     city: PropTypes.string.isRequired,
-
 }
+
 export default WeatherLocation;
