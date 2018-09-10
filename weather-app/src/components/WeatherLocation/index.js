@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {PropTypes} from 'prop-types';
 import Location from './Location';
 import WeatherData from './WeatherData';
 import transformWeather from './../services/transformWeather';
@@ -15,34 +16,33 @@ import './styles.css';
 
 class WeatherLocation extends Component { 
 
-    constructor(){ //siempre se debe invocar al componente base con super
-        super();
+    constructor(props){ //siempre se debe invocar al componente base con super
+        super(props);
+        const {city} = props;
+
         this.state = {
             city: "Buenos Aires",
             data: null,
         };
-        console.log('constructor');
     }
 
     componentDidMount() { //cdu
         //Funcion que siempre se ejecuta una primera vez, y no hay como obviar esa primera vez
         //luego llama a handleupdateclic
-        console.log('componentDidMount');
+        //console.log('componentDidMount');
         this.handleUpdateClic();
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('componentDidUpdate');
+       // console.log('componentDidUpdate');
     }
     
-    
-
     handleUpdateClic = () => {
         fetch(api_weather).then(resolve => {
             return resolve.json();
         }).then(data => {
             const newWeather = transformWeather(data);
-            console.log(newWeather);
+            //console.log(newWeather);
             //debugger;
             this.setState({
                 //Aqui detallo solo las variables que se que han cambiado o 
@@ -60,11 +60,16 @@ class WeatherLocation extends Component {
             <Location city={city}></Location>
             {data ? 
                 <WeatherData data={data}></WeatherData> : //parte de SI del IF
-                <CircularProgress size={50}></CircularProgress>
+                <CircularProgress size={50} />
             }
         </div>
         );
     };
-};
+}
 //<button onClick={this.handleUpdateClic}>Actualizar</button>
+
+WeatherLocation.propTypes = {
+    city: PropTypes.string.isRequired,
+
+}
 export default WeatherLocation;
