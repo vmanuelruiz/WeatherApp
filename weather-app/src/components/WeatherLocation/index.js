@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Location from './Location';
 import WeatherData from './WeatherData';
 import transformWeather from './../services/transformWeather';
 import {api_weather} from './../../constants/api_url';
-import {SUN} from './../../constants/weathers';
 import './styles.css';
 
 //SOLID
@@ -13,22 +13,29 @@ import './styles.css';
 //I = 
 //D = 
 
-const data = {
-    temperature: 20,
-    weatherState: SUN,
-    humidity: 10,
-    wind: '10 m/s',
-};
-
 class WeatherLocation extends Component { 
 
     constructor(){ //siempre se debe invocar al componente base con super
         super();
         this.state = {
             city: "Buenos Aires",
-            data: data,
+            data: null,
         };
+        console.log('constructor');
     }
+
+    componentDidMount() { //cdu
+        //Funcion que siempre se ejecuta una primera vez, y no hay como obviar esa primera vez
+        //luego llama a handleupdateclic
+        console.log('componentDidMount');
+        this.handleUpdateClic();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('componentDidUpdate');
+    }
+    
+    
 
     handleUpdateClic = () => {
         fetch(api_weather).then(resolve => {
@@ -36,8 +43,10 @@ class WeatherLocation extends Component {
         }).then(data => {
             const newWeather = transformWeather(data);
             console.log(newWeather);
-            debugger;
+            //debugger;
             this.setState({
+                //Aqui detallo solo las variables que se que han cambiado o 
+                // que tienen valroes nuevos
                 data: newWeather,
             });
         });
@@ -49,11 +58,13 @@ class WeatherLocation extends Component {
         return (
         <div className='weatherLocationCont'>
             <Location city={city}></Location>
-            <WeatherData data={data}></WeatherData>
-            <button onClick={this.handleUpdateClic}>Actualizar</button>
+            {data ? 
+                <WeatherData data={data}></WeatherData> : //parte de SI del IF
+                <CircularProgress size={50}></CircularProgress>
+            }
         </div>
         );
     };
 };
-
+//<button onClick={this.handleUpdateClic}>Actualizar</button>
 export default WeatherLocation;
