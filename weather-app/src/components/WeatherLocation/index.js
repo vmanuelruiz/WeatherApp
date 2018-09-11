@@ -47,7 +47,7 @@ class WeatherLocation extends Component {
             //debugger;
             this.setState({
                 //Aqui detallo solo las variables que se que han cambiado o 
-                // que tienen valroes nuevos
+                // que tienen valores nuevos
                 data: newWeather,
             });
         });
