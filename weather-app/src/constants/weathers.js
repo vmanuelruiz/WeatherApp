@@ -1,5 +1,5 @@
 export const CLOUD = 'cloud';
-export const SUN = 'sun';
+export const SUN = 'day-sunny';
 export const RAIN = 'rain';
 export const SNOW = 'snow';
 export const THUNDER = "thunder";
