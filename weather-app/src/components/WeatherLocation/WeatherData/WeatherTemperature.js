@@ -7,7 +7,7 @@ import './styles.css';
 
 const icons = {
     [CLOUD]: "cloud",
-    [SUN]: "sun",
+    [SUN]: "day-sunny",
     [RAIN]: "rain",
     [SNOW]: "snow",
     [THUNDER]: "day-thunderstorm",

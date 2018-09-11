@@ -10,8 +10,9 @@ import './App.css';
 const cities = [
   'Buenos Aires,ar',
   'Bogota,col',
-  'Ciudad de México,mx',
+  'Lima,pe',
   'Madrid,es',
+  'Ciudad de México,mx',
   'Barcelona,es',
 ];
 
