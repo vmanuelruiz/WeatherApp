@@ -36,7 +36,10 @@ class WeatherLocation extends Component {
     componentDidUpdate(prevProps, prevState) {
        // console.log('componentDidUpdate');
     }
-    
+
+    //componentWillMount muy probablemente sea deprecated, en su lugar se prefiere el
+    //ComponentDidMount, ademas que willmount no t asegura q solo se ejecutara una sola vez..
+        
     handleUpdateClic = () => {
         const api_weather = getUrlWeatherByCity(this.state.city);
         fetch(api_weather).then(resolve => {
