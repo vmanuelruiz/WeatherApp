@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
@@ -8,7 +9,6 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import LocationList from './components/LocationList';
 import ForecastExtended from './components/ForecastExtended';
 import {setCity} from './actions';
-import {store} from './store';
 
 import './App.css';
 
@@ -33,7 +33,7 @@ class App extends Component {
     this.setState({city}); // o city: city
     console.log(`handleSelectedLocation ${city}`);
 
-    store.dispatch(setCity(city));
+    this.props.setCity(city);
   };
 
   render() {
@@ -73,4 +73,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToPropsActions = dispatch => ({
+  setCity: value => dispatch(setCity(value))
+});
+
+const AppConnected = connect(null, mapDispatchToPropsActions)(App);
+
+export default AppConnected;
