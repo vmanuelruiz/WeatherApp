@@ -33,7 +33,22 @@ class ForecastExtended extends Component{
 
     componentDidMount(){
         //fecth or axios (una libreria que cubre navegadores mas antiguos y actuales)
-        const url_forecast = `${url}?q=${this.props.city}&appid=${api_key}`;
+        this.updateCity(this.props.city);
+    }
+
+    componentWillReceiveProps(nextProps){
+        //Punto previo al establecimiento de las propiedades y previo a la actualizacion del componente
+        // se ejecuta siempre que se modifican las propiedades, excepto la primera vez q se establece el componente, por eso
+        // es necesario ejecutar el updateCity en el componente DidMount arriba
+        if(nextProps.city !== this.props.city){
+            this.setState({forecastData: null});
+            this.updateCity(nextProps.city);
+        }
+
+    }
+
+    updateCity = city => {
+        const url_forecast = `${url}?q=${city}&appid=${api_key}`;
         fetch(url_forecast).then(
             data => (data.json())
         ).then(
@@ -44,7 +59,6 @@ class ForecastExtended extends Component{
                 this.setState({forecastData});
             }
         );
-
     }
 
     rederForecastItemDays(forecastData){
