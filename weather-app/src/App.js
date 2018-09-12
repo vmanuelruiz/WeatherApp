@@ -8,6 +8,7 @@ import {createStore} from 'redux';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import LocationList from './components/LocationList';
 import ForecastExtended from './components/ForecastExtended';
+import {setCity} from './actions';
 
 import './App.css';
 
@@ -24,7 +25,6 @@ const store = createStore(() => {}, window.__REDUX_DEVTOOLS_EXTENSION__ && windo
 //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 //este parametro es para enlazar REDUX con el pluggin de chrome...
 
-const setCity = value => ({type: 'setCity', value}); //aqui estoy creando una accion
 
 class App extends Component {
 
