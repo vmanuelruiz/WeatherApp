@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import {Grid, Row, Col} from 'react-flexbox-grid';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import LocationList from './components/LocationList';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles/';
+import LocationListContainer from './containers/LocationListContainer';
 import ForecastExtended from './components/ForecastExtended';
-import {setCity} from './actions';
 
 import './App.css';
 
@@ -21,6 +19,12 @@ const cities = [
   'Barcelona,es',
 ];
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
+
 
 class App extends Component {
 
@@ -29,17 +33,11 @@ class App extends Component {
     this.state = {city: null}; //esta asignacion con igual =, sola la puedo hacer en el constructor del componente
   }
 
-  handleSelectedLocation = city => {
-    this.setState({city}); // o city: city
-    console.log(`handleSelectedLocation ${city}`);
-
-    this.props.setCity(city);
-  };
-
   render() {
     const {city} = this.state;
+    
     return (
-      <MuiThemeProvider> 
+      <MuiThemeProvider theme={theme}> 
         <Grid>
           <Row>
             <AppBar position='sticky'>
@@ -52,10 +50,7 @@ class App extends Component {
           </Row>
           <Row>
             <Col xs={12} md={6}>
-              <LocationList
-                cities={cities}
-                onSelectedLocation={this.handleSelectedLocation}>
-              </LocationList>
+              <LocationListContainer cities={cities}></LocationListContainer>
             </Col>
             <Col xs={12} md={6}>
             <Paper elevation={4}>
@@ -73,10 +68,4 @@ class App extends Component {
   }
 }
 
-const mapDispatchToPropsActions = dispatch => ({
-  setCity: value => dispatch(setCity(value))
-});
-
-const AppConnected = connect(null, mapDispatchToPropsActions)(App);
-
-export default AppConnected;
+export default App; //retorno la mejora del componente App a la q agregrue nuevas propiedades
