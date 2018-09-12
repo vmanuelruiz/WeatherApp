@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import {Grid, Row, Col} from 'react-flexbox-grid';
+import {createStore} from 'redux';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import LocationList from './components/LocationList';
 import ForecastExtended from './components/ForecastExtended';
@@ -19,6 +20,10 @@ const cities = [
   'Barcelona,es',
 ];
 
+const store = createStore(() => {}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); //pasamos un reducer como parametro, q en este caso le pasamos una funcion vacia..
+//window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//este parametro es para enlazar REDUX con el pluggin de chrome...
+
 class App extends Component {
 
   constructor(){
@@ -27,8 +32,12 @@ class App extends Component {
   }
 
   handleSelectedLocation = city => {
-    //console.log(`handleSelectedLocation ${city}`);
     this.setState({city}); // o city: city
+    console.log(`handleSelectedLocation ${city}`);
+
+    const action = {type: 'setCity', value: city};
+
+    store.dispatch(action);
   };
 
   render() {
