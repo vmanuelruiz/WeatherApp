@@ -15,7 +15,7 @@ class LocationListContainer extends Component {
             <LocationList
                 cities={this.props.cities}
                 onSelectedLocation={this.handleSelectedLocation}>
-          </LocationList>
+          </LocationList> //este es un presentational component
         );
     }
 }
@@ -31,4 +31,5 @@ const mapDispatchToProps = dispatch => (
     }
   );
 
-export default connect(null, mapDispatchToProps)(LocationListContainer); //retorno la mejora del componente App a la q agregrue nuevas propiedades
+//retorno la mejora del componente App a la q agregrue nuevas propiedades, ahora se lo llama smart component
+export default connect(null, mapDispatchToProps)(LocationListContainer);
