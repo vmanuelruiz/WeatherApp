@@ -16,5 +16,8 @@ ForecastExtendedContainer.propTypes = {
     city: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ city }) => ({city}); //usando destructuting, igualito a esto= const mapStateToProps = state => ({city1: state.city});
-export default connect(mapStateToProps, null)(ForecastExtendedContainer); //este es un smart component
+//usando destructuting, igualito a esto= const mapStateToProps = state => ({city1: state.city});
+const mapStateToProps = ({ city }) => ({ city }); 
+
+//este es un smart component, ya que mapStateToProps inyecta las propiedades en props de ForecastExtendedContainer
+export default connect(mapStateToProps, null)(ForecastExtendedContainer); 
