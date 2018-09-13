@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect';
 import {SET_FORECAST_DATA} from './../actions';
 
 export const cities = (state = {}, action) => {
@@ -10,3 +11,10 @@ export const cities = (state = {}, action) => {
             return state;
     }
 }
+
+//AQUI HAGO EL SELECTOR XQ ES EL LUGAR INDICADO YA QUE AQUI SE CONOCE LA ESTRUCTURA DEL ESTADO DEL REDUCER..
+//Este selector obtiene el forecast data para la ciudad que le mande..
+//export const getForeCastDataFromCities = (state, city) => state[city] && state[city].forecastData;
+
+export const getForeCastDataFromCities = 
+createSelector((state, city) => state[city] && state[city].forecastData, forecastData => forecastData);
