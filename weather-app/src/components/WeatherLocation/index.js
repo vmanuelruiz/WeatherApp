@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {PropTypes} from 'prop-types';
-import getUrlWeatherByCity from './../services/getUrlWeatherByCity';
 import Location from './Location';
 import WeatherData from './WeatherData';
-import transformWeather from './../services/transformWeather';
 import './styles.css';
 
 //SOLID
@@ -14,32 +12,8 @@ import './styles.css';
 //I = 
 //D = 
 
-class WeatherLocation extends Component { 
-
-    constructor(props){ //siempre se debe invocar al componente base con super
-        super(props);
-        const {city} = props;
-
-        this.state = {
-            city,
-            data: null,
-        };
-    }
-
-    componentDidMount() { //cdu
-        //Funcion que siempre se ejecuta una primera vez, y no hay como obviar esa primera vez
-        //luego llama a handleupdateclic
-        //console.log('componentDidMount');
-        this.handleUpdateClic();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-       // console.log('componentDidUpdate');
-    }
-
-    //componentWillMount muy probablemente sea deprecated, en su lugar se prefiere el
-    //ComponentDidMount, ademas que willmount no t asegura q solo se ejecutara una sola vez..
-        
+/**
+ *   
     handleUpdateClic = () => {
         const api_weather = getUrlWeatherByCity(this.state.city);
         fetch(api_weather).then(resolve => {
@@ -56,25 +30,42 @@ class WeatherLocation extends Component {
         });
     };
 
-    render = () =>{
-        const {onWeatherLocationClic} = this.props;
-        const {city, data} = this.state;
-        return (
-        <div className='weatherLocationCont' onClick={onWeatherLocationClic}>
-            <Location city={city}></Location>
-            {data ? 
-                <WeatherData data={data}></WeatherData> : //parte de SI del IF
-                <CircularProgress size={50} /> //parte del else del IF
-            }
-        </div>
-        );
-    };
-}
+        componentDidMount() { //cdu
+        //Funcion que siempre se ejecuta una primera vez, y no hay como obviar esa primera vez
+        //luego llama a handleupdateclic
+        //console.log('componentDidMount');
+        this.handleUpdateClic();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+       // console.log('componentDidUpdate');
+    }
+ * 
+ */
+
+const WeatherLocation = ({ onWeatherLocationClic, city, data}) => (  
+    //componentWillMount muy probablemente sea deprecated, en su lugar se prefiere el
+    //ComponentDidMount, ademas que willmount no t asegura q solo se ejecutara una sola vez..
+    <div className='weatherLocationCont' onClick={onWeatherLocationClic}>
+        <Location city={city}></Location>
+        {
+            data ? 
+            <WeatherData data={data} /> : //parte de SI del IF
+            <CircularProgress size={50} thickness={7} /> //parte del else del IF
+        }
+    </div>
+);
 //<button onClick={this.handleUpdateClic}>Actualizar</button>
 
 WeatherLocation.propTypes = {
     city: PropTypes.string.isRequired,
     onWeatherLocationClic: PropTypes.func,
+    data: PropTypes.shape({
+        temperature: PropTypes.number.isRequired,
+        weatherState: PropTypes.string.isRequired,
+        humidity: PropTypes.number.isRequired,
+        wind: PropTypes.string.isRequired,
+    }),
 }
 
 export default WeatherLocation;
