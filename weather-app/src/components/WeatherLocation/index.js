@@ -5,13 +5,6 @@ import Location from './Location';
 import WeatherData from './WeatherData';
 import './styles.css';
 
-//SOLID
-//S = Single Responsability
-//O = 
-//L = 
-//I = 
-//D = 
-
 /**
  *   
     handleUpdateClic = () => {

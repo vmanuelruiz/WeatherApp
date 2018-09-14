@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import WeatherData from './../WeatherLocation/WeatherData';
 //import transformWeather from '';
 
-
 const ForecastItem = ({weekDay, hour, data}) => (
     <div>
         <h2>{weekDay} - {hour} hs</h2>
