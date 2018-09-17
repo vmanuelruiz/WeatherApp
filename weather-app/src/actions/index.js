@@ -26,7 +26,6 @@ export const setSelectedCity = payload => {
 
         const state = getState();
         const date = state.cities[payload] && state.cities[payload].forecastDataDate;
-
         const now = new Date();
 
         if(date && (now - date) < 1 * 60 * 1000){ //si hace menos de 1 minuto se solicito el forecast, no se vuelve a hacer la peticion
